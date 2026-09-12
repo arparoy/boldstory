@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './pages/Home'
 import PostDetail from './pages/PostDetail'
+import Collections from './pages/Collections'
 import SearchOverlay from './components/SearchOverlay'
 import { useState, useEffect } from 'react'
 
@@ -28,6 +29,8 @@ export default function App() {
       {searchOpen && <SearchOverlay onClose={() => setSearchOpen(false)} />}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/collections" element={<Collections />} />
+        <Route path="/collections/:source" element={<Collections />} />
         <Route path="/post/:id" element={<PostDetail />} />
       </Routes>
       <Footer />

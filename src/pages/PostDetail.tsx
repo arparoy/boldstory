@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
 import { posts } from '../data/posts'
 import ReadingProgress from '../components/ReadingProgress'
+import { useEffect } from 'react'
 
 export default function PostDetail() {
   const { id } = useParams<{ id: string }>()
@@ -22,10 +23,23 @@ export default function PostDetail() {
   const wordCount = post.content.join(' ').split(/\s+/).length
   const readTime = Math.max(1, Math.ceil(wordCount / 200))
 
-  const related = posts
-    .filter(p => p.id !== post.id)
+  let related = posts
+    .filter(p => p.id !== post.id && p.source === post.source)
     .sort(() => Math.random() - 0.5)
     .slice(0, 4)
+
+  // If not enough from same source, fill with random
+  if (related.length < 4) {
+    const others = posts
+      .filter(p => p.id !== post.id && !related.includes(p))
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 4 - related.length)
+    related.push(...others)
+  }
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [id])
 
   return (
     <>
@@ -38,7 +52,11 @@ export default function PostDetail() {
           <div className="post-detail-meta">
             <span>📝 {post.content.length} paragraphs</span>
             <span>⏱ {readTime} min read</span>
-            <span>📖 Story #{post.id}</span>
+            {post.source && post.source !== 'Story Flex Original' && (
+              <Link to={`/collections/${encodeURIComponent(post.source)}`} style={{ color: 'var(--accent)', fontWeight: 600 }}>
+                📂 {post.source}
+              </Link>
+            )}
           </div>
         </div>
         {post.images[0] && (

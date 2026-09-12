@@ -23,7 +23,12 @@ export default function PostCard({ post, index = 0 }: PostCardProps) {
         )}
       </div>
       <div className="post-card-body">
-        <div className="post-card-date">{dateStr}</div>
+        <div className="post-card-date">
+          {dateStr}
+          {post.source && post.source !== 'Story Flex Original' && (
+            <span className="post-card-source">{post.source}</span>
+          )}
+        </div>
         <h3 className="post-card-title">{post.title}</h3>
         <p className="post-card-excerpt">{post.excerpt}</p>
         <div className="post-card-footer">

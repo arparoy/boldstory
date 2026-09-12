@@ -7,6 +7,9 @@ export interface BlogPost {
   excerpt: string
   content: string[]
   images: string[]
+  source: string
 }
 
 export const posts: BlogPost[] = postData as BlogPost[]
+
+export const sources = [...new Set(posts.map(p => p.source))].sort()

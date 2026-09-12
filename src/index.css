@@ -182,6 +182,8 @@ img { max-width: 100%; display: block; }
 .search-btn:hover { border-color: var(--accent); color: var(--accent); }
 
 .theme-toggle { font-size: 1.2rem; }
+.discord-btn { color: #5865F2; }
+.discord-btn:hover { background: rgba(88, 101, 242, 0.1); color: #5865F2; }
 
 .mobile-menu-btn {
   display: none;
@@ -465,6 +467,16 @@ img { max-width: 100%; display: block; }
   content: '';
   width: 16px; height: 1px;
   background: var(--accent-soft);
+}
+.post-card-source {
+  margin-left: auto;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--bg-soft);
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 .post-card-title {
   font-family: var(--font-bengali);

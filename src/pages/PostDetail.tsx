@@ -34,6 +34,9 @@ export default function PostDetail() {
         {post.content.map((para, i) => (
           <p key={i}>{para}</p>
         ))}
+        {post.images.slice(1).map((img, i) => (
+          <img key={`img-${i}`} src={img} alt={`${post.title} - image ${i + 2}`} />
+        ))}
       </div>
       <div className="share-section">
         <span>Share this post</span>
